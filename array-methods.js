@@ -5,8 +5,11 @@ var dataset = require('./dataset.json');
   greater than 100000.00
   assign the resulting array to `hundredThousandairs`
 */
-var hundredThousandairs = null;
+function getNumbers(element, index, array){
+  return element.amount > 100000.00;
+} 
 
+var hundredThousandairs = dataset.bankBalances.filter(getNumbers);
 /*
   set a new key for each object in bankBalances named `rounded`
   the value of this key will be the `amount` rounded to the nearest dollar
@@ -18,7 +21,17 @@ var hundredThousandairs = null;
     }
   assign the resulting array to `roundedDollar`
 */
-var roundedDollar = null;
+function roundKey(element,index,array){
+
+  return{
+    "amount":element.amount,
+    "state":element.state,
+    "rounded":Math.round(element.amount)
+  }
+}
+
+var roundedDollar = dataset.bankBalances.map(roundKey);
+
 
 /*
   set a the `amount` value for each object in bankBalances
@@ -30,7 +43,16 @@ var roundedDollar = null;
     }
   assign the resulting array to `roundedDime`
 */
-var roundedDime = null;
+function doDime(element,index,array){
+
+  return{
+    "amount": parseFloat(element.amount.substring(0,8)),
+    "state":element.state
+  }
+
+}
+
+var roundedDime = dataset.bankBalances.map(doDime);
 
 // set sumOfBankBalances to the sum of all amounts in bankBalances
 var sumOfBankBalances = null;
