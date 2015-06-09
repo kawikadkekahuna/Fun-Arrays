@@ -59,7 +59,7 @@ describe('Array Methods', function() {
   describe('sumOfInterests', function() {
 
     it('should be the sum the 18.9% interest for all amounts in bankBalances, in the selected states, rounded to the nearest cent', function() {
-      arrayMethods.sumOfInterests.should.be.equal(9930803.53);
+      arrayMethods.sumOfInterests.should.be.equal(2504611.23);
     });
 
   });
