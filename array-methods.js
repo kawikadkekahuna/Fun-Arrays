@@ -55,7 +55,12 @@ function doDime(element,index,array){
 var roundedDime = dataset.bankBalances.map(doDime);
 
 // set sumOfBankBalances to the sum of all amounts in bankBalances
-var sumOfBankBalances = null;
+var sumOfBankBalances = dataset.bankBalances.reduce(function(previous,current,index,array){
+  var rtn = previous + parseFloat(current.amount);
+  return Math.round(100 * rtn) / 100;
+},0);
+
+
 
 /*
   set sumOfInterests to the sum of the 18.9% interest
@@ -69,8 +74,20 @@ var sumOfBankBalances = null;
     Delaware
   the result should be rounded to the nearest cent
  */
-var sumOfInterests = null;
 
+var sumOfInterests = dataset.bankBalances.filter(function(element,index,array){
+  return element.state === "WI"||
+  element.state === "IL" ||
+  element.state === "WY" ||
+  element.state === "OH" ||
+  element.state === "GA" ||
+  element.state === "DE";
+}).reduce(function(prev,current,index,array){
+  return Math.round((prev + current.amount * .189) * 100) / 100;
+
+},0);
+
+console.log(sumOfInterests);
 /*
   set sumOfHighInterests to the sum of the 18.9% interest
   for all amounts in bankBalances
